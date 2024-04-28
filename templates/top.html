@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- this goes to the 'static' folder and grabs our CSS -->
+  <!-- [Brief Intro:] CSS is how we make the websites look nicer -->
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/pure.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}">
+  <title>{{ page.title }}</title>
+</head>
+
+<body>
+  <!--CSS CODE FOR DROP DOWN-->
+  <style>
+    .dropbtn {
+      background-color: #446CB3;
+      color: white;
+      padding-bottom: 0;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      padding: .5em 1em;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #446CB3;
+      min-width: 160px;
+      
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      font-size: 1em;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #182741
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+      background-color: #182741;
+    }
+  </style>
+
+  <!-- Generating the menu and what happens when the user is logged in VS logged out -->
+  <div id="header" class="pure-menu pure-menu-horizontal">
+    <a href="/" class="pure-menu-heading pure-menu-link">UniDB</a>
+    {% if session.logged_in %}
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a href="{{ url_for('list_units') }}" class="pure-menu-link">All Units</a></li>
+      <div class="dropdown">
+        <button class="dropbtn" class="pure-menu-item">Academic Staff</button>
+        <div class="dropdown-content">
+          <a href="{{ url_for('list_staff') }}">Staff List</a>
+          <a href="{{ url_for('get_staff') }}">Identify Staff</a>
+          <a href="{{ url_for('staff_per_dept') }}">Staff Per Department</a>
+          <a href="{{ url_for('insert_staff') }}">Add New Staff</a>
+        </div>
+      </div>
+      <li class="pure-menu-item"><a href="{{ url_for('logout')}}" class="pure-menu-link">Logout</a></li>
+    </ul>
+    {% endif %}
+    <div id="top-unikey">{{ page.unikey }}</div>
+  </div>
+  <!--
+            This is for our flashed messages
+            Whenever we use flash('message in here')
+            it will come out inside this list
+        -->
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class=flashes>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}

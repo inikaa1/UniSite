@@ -1,0 +1,61 @@
+{% include 'top.html' %}
+<!-- HTML CONTENT FOR ACADEMIC STAFF-->
+<style>
+    .newbtn {
+      background-color: #446CB3;
+      width: 22%;
+      color: white;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      padding: 15px;
+      display: inline-block;
+      margin: 5px 0 22px 0;
+    }
+
+    .newbtn:hover {
+      background-color: #182741;
+    }
+    
+    input {
+        width: 20%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+    input:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+</style>
+
+<div id="content">
+    <div id="container">
+        <h1 class="page-title">Add New Staff</h1>
+        <br><br>
+
+        <form method="POST" action="{{url_for('insert_staff')}}">
+            <label>Enter staff id: </label><br>
+            <input type="text" name="staffID" placeholder="eg: 1234567"><br><br>
+            <label>Enter staff name: </label><br>
+            <input type="text" name="staff_name" placeholder="eg: Billy Joe"><br><br>
+            <label>Enter departmentID: </label><br>
+            <input type="text" name="departmentID" placeholder="eg: SIT"><br><br>
+            <label>Enter password: </label><br>
+            <input type="password" name="staff_password"><br><br>
+            <label>Enter address: </label><br>
+            <input type="text" name="staff_address" placeholder="eg: Sydney"><br><br>
+            <label>Enter salary: </label><br>
+            <input type="text" name="staff_salary" placeholder="$$">
+            <br><br><br> 
+            <button class="newbtn" type="submit"> Add </button>
+            <br><br><br>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>
